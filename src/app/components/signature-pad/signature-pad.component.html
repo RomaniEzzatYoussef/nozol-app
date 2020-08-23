@@ -1,0 +1,27 @@
+<ion-grid>
+    <ion-row>
+        <ion-col>
+            <ion-item lines="none">
+                <ion-button size="small" [disabled]="isSignature" color="light" slot="end" (click)="drawClear()">
+                    <ion-icon name="close-outline"></ion-icon>
+                    Clear
+                </ion-button>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col size="12" class="picker">
+            <ion-item>
+                <signature-pad class="signature-pad" [options]="signaturePadOptions" #signatureCanvas *ngIf="!signatureImage && !isSignature"></signature-pad>
+                <ion-img [src]="signatureImage" *ngIf="signatureImage && isSignature"></ion-img>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-button size="small"  [disabled]="isSignature"  color="secondary" (click)="drawComplete()">Done</ion-button>
+        </ion-col>
+    </ion-row>
+</ion-grid>
+
+

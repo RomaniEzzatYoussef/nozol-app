@@ -1,0 +1,144 @@
+<ion-header class="ion-no-border">
+  <ion-item lines="none">
+      <ion-button fill="clear" color="light" slot="end" routerLink="/notifications">
+          <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
+      </ion-button>
+    <ion-avatar slot="end" routerLink="/profile">
+      <img src="assets/profile.jpg">
+    </ion-avatar>
+    <ion-menu-button fill="clear" color="light">
+      <ion-icon slot="icon-only" name="menu"></ion-icon>
+    </ion-menu-button>
+  </ion-item>
+  <ion-item lines="none">
+      <ion-label class="ion-text-center">
+        <h1>Services</h1>
+      </ion-label>
+      <ion-label class="ion-text-center">
+       <h5> Room number: <span style="color: #f5f6f9">534</span> </h5>
+      </ion-label>
+  </ion-item>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-grid class="ion-no-padding">
+        <ion-row>
+            <ion-col>
+                <ion-searchbar></ion-searchbar>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12" size-sm="8" offset-sm="2">
+                <div class="ion-text-center">
+                    <ion-spinner *ngIf="isLoading"></ion-spinner>
+                    <div *ngIf="!isLoading && paidCategories.length <= 0">
+                        <p>No Categories found! Please try again!</p>
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <div class="ion-padding">
+                    <ion-row class="ion-align-items-center ion-padding-horizontal">
+                        <ion-col size="6">
+                            <h5>Paid Services</h5>
+                        </ion-col>
+                        <ion-col size="6" class="ion-text-right">
+                            <ion-button fill="clear" color="dark">
+                                <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
+                            </ion-button>
+                        </ion-col>
+                    </ion-row>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row >
+            <ion-col size="12">
+                <ion-slides [options]="options" >
+                    <ion-slide *ngFor="let category of paidCategories">
+                        <ion-card class="card" [routerLink]="['/' , 'services', 'tabs', 'discover', category.id]">
+                            <ion-card-content class="ion-text-left">
+                                <div class="img-wrapper">
+                                    <ion-img [src]="category.imageUrl"></ion-img>
+                                </div>
+                                <ion-card-title class="title">{{category.title}}</ion-card-title>
+<!--                                <ion-card-subtitle>{{category.description}}</ion-card-subtitle>-->
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-slide>
+                </ion-slides>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12" size-sm="8" offset-sm="2">
+                <div class="ion-text-center">
+                    <ion-spinner *ngIf="isLoading"></ion-spinner>
+                    <div *ngIf="!isLoading && unpaidCategories.length <= 0">
+                        <p>No Categories found! Please try again!</p>
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <div class="ion-padding">
+                    <ion-row class="ion-align-items-center ion-padding-horizontal">
+                        <ion-col size="6">
+                            <h5>Unpaid Services</h5>
+                        </ion-col>
+                        <ion-col size="6" class="ion-text-right">
+                            <ion-button fill="clear" color="dark">
+                                <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
+                            </ion-button>
+                        </ion-col>
+                    </ion-row>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row class="ion-align-items-stretch">
+            <ion-col class="unpaid-col" size="4" size-sm="4"  *ngFor="let category of unpaidCategories">
+                <ion-card class="unpaid-card"  [routerLink]="['/' , 'services', 'tabs', 'discover', category.id]">
+                    <ion-card-content>
+                        <div class="unpaid-img-wrapper">
+                            <ion-img [src]="category.imageUrl"></ion-img>
+                        </div>
+                        <ion-card-title class="title">{{category.title}}</ion-card-title>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <div class="ion-padding">
+                    <ion-row class="ion-align-items-center ion-padding-horizontal">
+                        <ion-col size="6">
+                            <h5>Other Services</h5>
+                        </ion-col>
+                        <ion-col size="6" class="ion-text-right">
+                            <ion-button fill="clear" color="dark">
+                                <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
+                            </ion-button>
+                        </ion-col>
+                    </ion-row>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="4" size-sm="4">
+                <ion-slides [options]="options" >
+                    <ion-slide>
+                        <ion-card class="unpaid-card">
+                            <ion-card-content class="ion-text-left">
+                                <div class="other-wrapper">
+                                    <ion-label color="primary"><h3>Looking for some other services</h3></ion-label>
+                                </div>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-slide>
+                </ion-slides>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+

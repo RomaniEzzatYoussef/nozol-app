@@ -1,0 +1,151 @@
+<ion-header>
+  <ion-toolbar color="medium" class="ion-text-center">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Check In Form</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form" (ngSubmit)="onCheckIn()">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">First Name</ion-label>
+              <ion-input type="text"  formControlName="firstName"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Family Name</ion-label>
+              <ion-input type="text"  formControlName="familyName"></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="3" offset-sm="3">
+          <ion-item>
+            <ion-label position="floating">Check In</ion-label>
+            <ion-datetime min="2019-01-01" max="2022-12-31" formControlName="checkInDate"></ion-datetime>
+            <ion-icon name="calendar-outline" slot="end"></ion-icon>
+          </ion-item>
+        </ion-col>
+        <ion-col size-sm="3">
+          <ion-item>
+            <ion-label position="floating">Check Out</ion-label>
+            <ion-datetime min="2019-01-02" max="2022-12-31" formControlName="checkOutDate"></ion-datetime>
+            <ion-icon name="calendar-outline" slot="end"></ion-icon>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-list>
+            <ion-item>
+              <ion-label>How did you book</ion-label>
+              <ion-select name="bookingWay" formControlName="bookingWay">
+                <ion-select-option value="website">Website</ion-select-option>
+                <ion-select-option value="hotel">Hotel</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Name of Travel Agent</ion-label>
+              <ion-input type="text" placeholder="Travel Agent" formControlName="travelAgent"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Name of your website</ion-label>
+              <ion-input type="text" placeholder="website" formControlName="website"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Full Address</ion-label>
+              <ion-input type="text" placeholder="Address" formControlName="fullAddress"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Job</ion-label>
+              <ion-input type="text" placeholder="Job" formControlName="job"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Date of Birth</ion-label>
+              <ion-datetime min="1910-01-02" max="{{currentDate}}" formControlName="dateOfBirth"></ion-datetime>
+              <ion-icon name="calendar-outline" slot="end"></ion-icon>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Wife Name</ion-label>
+              <ion-input type="text" placeholder="Wife Name" formControlName="wifeName"></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="3" offset-sm="3">
+          <ion-item>
+            <ion-label position="floating">Number Of Adult</ion-label>
+            <ion-input type="number" formControlName="numberOfAdult"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size-sm="3">
+          <ion-item>
+            <ion-label position="floating">Number Of Children</ion-label>
+            <ion-input type="number" formControlName="numberOfChildren"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">Number Of room required</ion-label>
+              <ion-input type="number" formControlName="numberOfRooms"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Payment Method</ion-label>
+              <ion-select name="paymentMethod" formControlName="paymentMethod">
+                <ion-select-option value="Credit Card">Credit Card</ion-select-option>
+                <ion-select-option value="Cash">Cash</ion-select-option>
+                <ion-select-option value="Bank Transfer">Bank Transfer</ion-select-option>
+                <ion-select-option value="Ewallets">Ewallets</ion-select-option>
+                <ion-select-option value="Prepaid Cards">Prepaid Cards</ion-select-option>
+                <ion-select-option value="Direct Deposit">Direct Deposit</ion-select-option>
+                <ion-select-option value="Mobile Payments">Mobile Payments</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="ion-text-center" size-sm="6" offset-sm="3">
+          <ion-item>
+            <ion-label>Select you ID Proof</ion-label>
+            <ion-select name="paymentMethod" formControlName="idProofType">
+              <ion-select-option value="national id">National ID</ion-select-option>
+              <ion-select-option value="passport ">PassPort</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>Upload ID Proof</ion-label>
+          </ion-item>
+          <app-image-picker [showPreview]="form.get('idProof').value" (imagePick)="onImagePicked($event)"></app-image-picker>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item lines="none">
+            <ion-label>Digital Signature</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col  size-sm="6" offset-sm="3">
+          <app-signature-pad  [showPreview]="form.get('signature').value"></app-signature-pad>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3" class="ion-text-center">
+          <ion-button [disabled]="!form.valid" (click)="onCheckIn()" type="submit" expand="full">Submit</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

@@ -1,0 +1,115 @@
+<ion-header>
+  <ion-toolbar color="medium">
+    <ion-title class="ion-text-center">{{ isLogin? 'Sign In' : 'Sign Up'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <ion-grid>
+      <ion-row *ngIf="isLogin">
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item class="ion-no-padding" size-mid="6" offset-mid="6">
+            <ion-img align="center" src="assets/img/welcome-nozol.png"></ion-img>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="!isLogin">
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-label>
+            <h1>Create an account</h1>
+            <p>Sign Up to continue</p>
+          </ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-list>
+            <ion-item *ngIf="!isLogin">
+              <ion-label position="floating">Name</ion-label>
+              <ion-input type="text" ngModel name="name" required #nameCtrl="ngModel"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">E-Mail</ion-label>
+              <ion-input type="email" ngModel  name="email" required email #emailCtrl="ngModel"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="!emailCtrl.valid && emailCtrl.touched" lines="none">
+              <ion-label color="danger">Should be a valid email address.</ion-label>
+            </ion-item>
+            <ion-list *ngIf="!isLogin">
+              <ion-radio-group ngModel name="gender">
+                <ion-list-header>
+                  <ion-label>
+                    Gender
+                  </ion-label>
+                </ion-list-header>
+                <ion-item class="ion-margin">
+                  <ion-label>Male</ion-label>
+                  <ion-radio value="male"></ion-radio>
+                </ion-item>
+                <ion-item class="ion-margin">
+                  <ion-label>Female</ion-label>
+                  <ion-radio value="female"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+            <ion-item *ngIf="!isLogin">
+              <ion-label position="floating">Phone</ion-label>
+              <ion-input type="text" ngModel name="phone" required #phoneCtrl="ngModel"></ion-input>
+            </ion-item>
+<!--            <div *ngIf="!isLogin">-->
+<!--              <ion-item>-->
+<!--                <ion-label>Phone</ion-label>-->
+<!--                <ion-select multiple="true" [(ngModel)]="user.phone" name="phone">-->
+<!--                  <div *ngFor="let country_code of country_codes">-->
+<!--                    <ion-select-option [value]="country_code.dial_code">{{country_code.name + ' ' + country_code.dial_code}}</ion-select-option>-->
+<!--                  </div>-->
+<!--                </ion-select>-->
+<!--              </ion-item>-->
+<!--            </div>-->
+            <ion-item>
+              <ion-label position="floating">Password</ion-label>
+              <ion-input type="password" ngModel name="password" required minlength="6" #passwordCtrl="ngModel">
+<!--                <ion-icon name="key-outline" slot="start"></ion-icon>-->
+              </ion-input>
+            </ion-item>
+            <ion-item *ngIf="!passwordCtrl.valid && passwordCtrl.touched" lines="none">
+              <ion-label color="danger">Should at least be 6 characters long.</ion-label>
+            </ion-item>
+            <div  *ngIf="!isLogin">
+              <ion-item>
+                <ion-label position="floating">Confirm Password</ion-label>
+                <ion-input type="password" ngModel name="confirm-password" required minlength="6" #confirmPasswordCtrl="ngModel">
+                  <!--                <ion-icon name="key-outline" slot="start"></ion-icon>-->
+                </ion-input>
+              </ion-item>
+              <ion-item *ngIf="passwordCtrl.value !== confirmPasswordCtrl.value && confirmPasswordCtrl.touched" lines="none">
+                <ion-label color="danger">Password must match.</ion-label>
+              </ion-item>
+            </div>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="isLogin">
+        <ion-col  size-sm="6" offset-sm="3">
+          <ion-item>
+            <ion-button slot="end" color="tertiary" fill="clear" routerLink="/auth/forgot-password">Forgot Password?</ion-button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3" class="ion-text-center">
+          <ion-button [disabled]="!form.valid" type="submit" expand="full" size="default">{{ isLogin? 'Sign In' : 'Sign Up' }}</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="4" offset-sm="4">
+          <ion-item class="ion-margin">
+            <p>{{isLogin ? 'Don\'t have an account ?' : 'Already have an account ?'}}</p>
+            <ion-button type="button" (click)="onSwitchAuthMode()" fill="clear" expand="full"> {{ isLogin? 'SignUp' : 'Login' }}</ion-button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

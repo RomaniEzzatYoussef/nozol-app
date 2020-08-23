@@ -1,0 +1,8 @@
+{
+  "name": "nozol-app",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}

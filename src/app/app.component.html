@@ -1,0 +1,74 @@
+<ion-app>
+  <ion-menu side="start" menuId="profile">
+    <ion-header>
+      <ion-toolbar class="translucent">
+        <ion-title></ion-title>
+        <ion-menu-toggle>
+          <ion-item routerLink="/profile">
+            <ion-avatar slot="start">
+              <img src="assets/profile.jpg">
+            </ion-avatar>
+            <ion-label>
+              <h2>{{'user.name'}}</h2>
+              <p>{{'user.email'}}</p>
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle>
+          <ion-item lines="none" routerLink="/services/tabs/discover">
+            <ion-icon name="create-outline" slot="start"></ion-icon>
+            <ion-label>Services</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item lines="none" routerLink="/services/tabs/my-services">
+            <ion-icon name="business-outline" slot="start"></ion-icon>
+            <ion-label>My Services</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item lines="none" routerLink="/check-in">
+            <ion-icon name="log-in-outline" slot="start"></ion-icon>
+            <ion-label>Check In</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item lines="none" routerLink="/check-out">
+            <ion-icon name="log-out-outline" slot="start"></ion-icon>
+            <ion-label>Check Out</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item lines="none" routerLink="/notifications">
+            <ion-icon name="notifications-outline" slot="start"></ion-icon>
+            <ion-label>Notification</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item lines="none" routerLink="/auth/forgot-password">
+            <ion-icon name="key-outline" slot="start"></ion-icon>
+            <ion-label>Change Password</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item lines="none" routerLink="/settings">
+            <ion-icon name="settings-outline" slot="start"></ion-icon>
+            <ion-label>Settings</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item lines="none" (click)="onLogout()" button>
+            <ion-icon name="log-out-sharp" slot="start"></ion-icon>
+            <ion-label>Logout</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet main></ion-router-outlet>
+</ion-app>
