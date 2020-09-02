@@ -6,6 +6,7 @@ import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {Plugins} from "@capacitor/core";
 import {EnvService} from "../env/env.service";
+import {Image} from "../../models/image.model";
 
 interface AuthResponseData {
     access_token: string;
@@ -82,7 +83,7 @@ export class AuthService implements OnDestroy {
                 if (expirationTime <= new Date()) {
                     return null;
                 }
-                const user = new User('', '','', '', '', '',  parsedData.access_token, expirationTime);
+                const user = new User('', '','', '', '', '', new Image(10, 'blob' , 'name', []),  parsedData.access_token, expirationTime);
                 return user;
             }), tap(user => {
                 if (user) {
@@ -146,7 +147,7 @@ export class AuthService implements OnDestroy {
 
     private setUserData(email: string, password: string, authResponseData: AuthResponseData) {
         const expirationTime = new Date(new Date().getTime() + (authResponseData.expires_in * 1000));
-        const user = new User('', '', email, password, '', '', authResponseData.access_token, expirationTime);
+        const user = new User('', '', email, password, '', '', new Image(10, 'blob' , 'name', []), authResponseData.access_token, expirationTime);
         this._user.next(user);
         this.autoLogout(user.tokenDuration);
         this.storeAuthData(authResponseData);

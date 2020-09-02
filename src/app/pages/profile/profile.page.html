@@ -12,7 +12,10 @@
         <ion-grid>
             <ion-row>
                 <ion-col class="ion-text-center" size-sm="6" offset-sm="3">
-                    <app-image-picker [showPreview]="form.get('image').value" (imagePick)="onImagePicked($event)"></app-image-picker>
+                    <app-image-picker [image]="selectedImage" [showPreview]="form.get('image').value" (imagePick)="onImagePicked($event)"></app-image-picker>
+<!--                    <div class="picker">-->
+<!--                        <ion-img role="button" class="image" [src]="selectedImage" *ngIf="selectedImage"></ion-img>-->
+<!--                    </div>-->
                 </ion-col>
             </ion-row>
           <ion-row>
@@ -20,7 +23,7 @@
               <ion-list>
                 <ion-item>
                   <ion-label position="floating">Name</ion-label>
-                  <ion-input type="text" formControlName="name"></ion-input>
+                  <ion-input type="text"  autocomplete autocorrect formControlName="name"></ion-input>
                 </ion-item>
                 <ion-item>
                   <ion-label position="floating">Phone</ion-label>
@@ -33,11 +36,11 @@
               </ion-list>
             </ion-col>
           </ion-row>
-        <ion-row>
-            <ion-col size-sm="6" offset-sm="3" class="ion-text-center">
-                <ion-button [disabled]="!form.valid" (click)="onSubmit()" type="submit" expand="full">Submit</ion-button>
-            </ion-col>
-        </ion-row>
+          <ion-row>
+                <ion-col size-sm="6" offset-sm="3" class="ion-text-center">
+                <ion-button [disabled]="!form.valid" type="submit" expand="full">Submit</ion-button>
+                </ion-col>
+          </ion-row>
         </ion-grid>
     </form>
 </ion-content>

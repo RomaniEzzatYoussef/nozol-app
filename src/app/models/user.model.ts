@@ -1,3 +1,5 @@
+import {Image} from "./image.model";
+
 export class User {
     constructor(
         public id: string,
@@ -6,6 +8,7 @@ export class User {
         public password: string,
         public phone: string,
         public gender: string,
+        public image: Image,
         private _token: string,
         private tokenExpirationDate: Date
     ) {}
